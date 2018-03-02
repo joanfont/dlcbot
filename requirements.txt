@@ -1,0 +1,6 @@
+requests==2.18.4
+python-telegram-bot==9.0.0
+redis==2.10.6
+python-decouple==3.1
+beautifulsoup4==4.6.0
+lxml
