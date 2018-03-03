@@ -1,5 +1,6 @@
 import redis
 
+from dlcbot.config import config
 
 class Cache:
 
@@ -35,3 +36,13 @@ class Redis(Cache):
     def has(self, key):
         return self.get(key) is not None
 
+
+
+class Factory:
+
+    @classmethod
+    def redis(cls):
+        return Redis(
+            config.REDIS_HOST,
+            config.REDIS_PORT
+        )

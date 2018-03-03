@@ -5,10 +5,12 @@ import requests
 
 
 class Provider:
-    pass
+    NAME = None
+
 
 
 class DLC(Provider):
+    NAME = 'DLC'
 
     SEARCH_URL = 'http://mdlc.iec.cat/results.asp?txtEntrada={word}&operEntrada=0'
     ENTRY_URL = 'http://mdlc.iec.cat/accepcio.asp?Id={id}'
