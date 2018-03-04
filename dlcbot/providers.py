@@ -1,4 +1,5 @@
 import re
+from urllib.parse import quote
 
 from bs4 import BeautifulSoup
 import requests
@@ -19,7 +20,8 @@ class DLC(Provider):
         self._session = requests.Session()
 
     def find(self, word):
-        search_url = self.SEARCH_URL.format(word=word)
+        encoded_word = self._encode_word(word)
+        search_url = self.SEARCH_URL.format(word=encoded_word)
         search_response = self._session.get(search_url)
         word_id = self._get_id(search_response.content)
 
@@ -28,6 +30,9 @@ class DLC(Provider):
         definition = self._get_definition(entry_response.content)
 
         return definition
+
+    def _encode_word(self, word):
+        return quote(word.encode('iso-8859-1'))
 
     def _get_id(self, html):
         soup = BeautifulSoup(html, 'html.parser')
