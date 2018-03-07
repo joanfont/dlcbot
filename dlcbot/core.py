@@ -8,7 +8,8 @@ from dlcbot import commands
 class DlcBot:
 
     AVAILABLE_COMMANDS = [
-        commands.DLC
+        commands.DLC,
+        commands.DCVB,
     ]
 
     def __init__(self, token):

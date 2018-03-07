@@ -32,3 +32,10 @@ class Factory:
         cache = CacheFactory.redis()
 
         return Dictionary(provider, cache)
+
+    @classmethod
+    def dcvb(cls):
+        provider = providers.DCVB()
+        cache = CacheFactory.redis()
+
+        return Dictionary(provider, cache)

@@ -26,3 +26,9 @@ class Command:
 class DLC(Command):
     NAME = 'dlc'
     DICTIONARY = Factory.dlc()
+
+
+class DCVB(Command):
+    NAME = 'dcvb'
+    DICTIONARY = Factory.dcvb()
+
