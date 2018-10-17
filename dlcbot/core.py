@@ -1,15 +1,20 @@
 import re
 
 import telegram
-from telegram.ext import Updater, CommandHandler
+from telegram.ext import Updater, CommandHandler, MessageHandler
 
-from dlcbot import commands
+from dlcbot import messages, commands
 
 class DlcBot:
 
     AVAILABLE_COMMANDS = [
         commands.DLC,
-        commands.DCVB,
+        commands.DCVB
+    ]
+
+    AVAILABLE_MESSAGES = [
+        messages.DLC,
+        messages.DCVB
     ]
 
     def __init__(self, token):
@@ -24,10 +29,21 @@ class DlcBot:
         self.updater.stop()
 
     def _configure_callbacks(self):
-        dispatcher = self.updater.dispatcher
+        self._configure_commands()
+        self._configure_handlers()
 
+    def _configure_commands(self):
+        dispatcher = self.updater.dispatcher
         for command in self.AVAILABLE_COMMANDS:
             dispatcher.add_handler(CommandHandler(
                command.NAME,
                command.handler
+            ))
+
+    def _configure_handlers(self):
+        dispatcher = self.updater.dispatcher
+        for message in self.AVAILABLE_MESSAGES:
+            dispatcher.add_handler(MessageHandler(
+               message.filter,
+               message.handler
             ))

@@ -1,34 +1,33 @@
-from dlcbot.dictionary import Factory
 
 class Command:
     NAME = None
-    DICTIONARY = None
-
-    @property
-    def dictionary(self):
-        raise NotImplementedError()
 
     @classmethod
     def handler(cls, bot, update):
-        chat_id = update.message.chat_id
-        message = update.message.text
-        word = cls._parse_message(message)
-
-        definition =  cls.DICTIONARY.find(word)
-
-        bot.send_message(chat_id, definition)
+        raise NotImplementedError()
 
     @classmethod
     def _parse_message(cls, message):
         return message.replace(f'/{cls.NAME} ', '')
 
 
-class DLC(Command):
+class DictionaryCommandDeprecated(Command):
+
+    @classmethod
+    def handler(cls, bot, update):
+        chat_id = update.message.chat_id
+        message = update.message.text
+        word = cls._parse_message(message)
+        bot.send_message(
+            chat_id,
+            f'Usa `!{cls.NAME} {word}` per a obtenir la definició de la paraula',
+            parse_mode='Markdown'
+        )
+
+
+class DLC(DictionaryCommandDeprecated):
     NAME = 'dlc'
-    DICTIONARY = Factory.dlc()
 
 
-class DCVB(Command):
+class DCVB(DictionaryCommandDeprecated):
     NAME = 'dcvb'
-    DICTIONARY = Factory.dcvb()
-
