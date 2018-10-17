@@ -3,7 +3,7 @@ from dlcbot import providers
 
 class Dictionary:
 
-    CACHE_TTL = 24 * 60 * 60
+    CACHE_TTL = 0
 
     def __init__(self, provider, cache):
         self._provider = provider
