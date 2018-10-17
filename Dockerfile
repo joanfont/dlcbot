@@ -1,4 +1,4 @@
-FROM library/python:3.6.4-alpine
+FROM library/python:3.7.0-alpine
 
 RUN apk --update add ca-certificates g++ gcc libxslt-dev
 RUN pip3 install -U pip
